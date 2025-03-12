@@ -1,49 +1,31 @@
-
-import java.util.Random;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Random rand = new Random();
+    Scanner sc = new Scanner(System.in);
+    int llamadas = 0, duracionllamada = 0, costofinal = 0, opcion, minutos;
+    System.out.println("---- CONTROLADOR DE LINEAS TELEFONICAS ----");
 
-        double dinero;
-        int resultado;
+    while (true){
+        System.out.println("\n1. Registrar Llamada. \n2. Mostrar información almacenada. \n3. Reiniciar. \n4. Salir.");
+        opcion = sc.nextInt();
+        if (opcion == 1) {
+            System.out.println("\n1. Llamada local. \n2. Llamada de larga distancia. \n3. Llamada a celular.");
+            int tipo = sc.nextInt();
+            System.out.println("Duración en minutos: ");
+            minutos = sc.nextInt();
+            llamadas += 1;
+            duracionllamada += minutos;
+            costofinal += (tipo == 1 ? 50 : tipo ==2 ? 350: 150) * minutos;
+        } else if (opcion == 2) {
+            System.out.println("Llamadas = " + llamadas + "\n Duracion Total:" + duracionllamada + " minutos" + "\n Costo total: $ " + costofinal);
+        } else if (opcion == 3) {
+            llamadas = costofinal = duracionllamada = 0;
+            System.out.println("Toda la información ha sido reiniciada");
+        } else if (opcion == 4) break;
 
-        System.out.print("Hola ingresa tu dinero ---> ");
-        dinero = sc.nextDouble();
-        while (dinero > 0) {
-            resultado = rand.nextInt(3) + 1;
-            System.out.println("obtuviste el numero " + resultado);
-
-            dinero = switch (resultado) {
-                case 3 -> 0;
-                case 2 -> dinero / 2;
-                default -> dinero * 2;
-            };
-            if (dinero == 0) {
-                System.out.println("¡Perdiste todo tu dinero! :(");
-                break;
-            }
-            System.out.println("tu saldo ahora es ---> " + dinero);
-            System.out.print("¿quieres seguir jugando? ---> (si/no):");
-            if (!sc.next().equalsIgnoreCase("si"));
-            System.out.print("¿quieres seguir con este monto o ingresar uno nuevo? (actual/nuevo):");
-            if (sc.next().equalsIgnoreCase("nuevo")) {
-                System.out.print("Ingresa la nueva cantidad ---> ");
-                dinero = sc.nextDouble();
-            }
         }
-        System.out.println("Tu dinero final es:" + dinero);
+        sc.close();
     }
+
 }
-
-
-
-
-
-
-
-
-
-
